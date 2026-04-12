@@ -61,7 +61,7 @@ const _trendingPlaces = [
     distance: '18 Km away',
     price: 'From ₹2,902',
     rating: '4.5 (19,062)',
-    imageUrl: 'assets/home/t4.png'
+    imageUrl: 'assets/home/t4.png',
   ),
 ];
 
@@ -121,6 +121,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _navIndex = 0;
+  final Set<int> _selectedChips = {};
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            // ── Scrollable content ──────────────────────────────────────────
             Padding(
               padding: const EdgeInsets.only(bottom: 80),
               child: SingleChildScrollView(
@@ -160,8 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-
-            // ── Bottom nav bar ──────────────────────────────────────────────
             Positioned(
               left: 16,
               right: 16,
@@ -174,7 +172,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Header ─────────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Mandarin\nOriental',
               style: GoogleFonts.poppins(
                 fontSize: 12,
-                color: Color(0xFFCCE8E5),
+                color: const Color(0xFFCCE8E5),
                 height: 1.4,
               ),
               textAlign: TextAlign.right,
@@ -206,8 +203,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-  // ── Search bar ─────────────────────────────────────────────────────────────
   Widget _buildSearchBar() {
     return Container(
       height: 65,
@@ -246,46 +241,60 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Filter chips ───────────────────────────────────────────────────────────
   Widget _buildFilterChips() {
-    return SizedBox(
-      height: 30,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: _filterChips.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
-        itemBuilder: (context, i) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(_filterChips.length, (i) {
           final isFirst = i == 0;
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              color: _chipBg,
-              border: Border.all(color: _chipBorder),
-              borderRadius: BorderRadius.circular(60),
-            ),
-            alignment: Alignment.center,
-            child: Row(
-              children: [
-                if (isFirst) ...[
-                  const Icon(Icons.near_me, color: Colors.white, size: 13),
-                  const SizedBox(width: 4),
-                ],
-                Text(
-                  _filterChips[i],
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
+          final isSelected = _selectedChips.contains(i);
+
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (isSelected) {
+                    _selectedChips.remove(i);
+                  } else {
+                    _selectedChips.add(i);
+                  }
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? const Color(0xFF9CF1EC).withOpacity(0.35)
+                      : _chipBg,
+                  border: Border.all(color: _chipBorder),
+                  borderRadius: BorderRadius.circular(60),
                 ),
-              ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isFirst) ...[
+                      const Icon(Icons.near_me, color: Colors.white, size: 13),
+                      const SizedBox(width: 4),
+                    ],
+                    Text(
+                      _filterChips[i],
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
-        },
+        }),
       ),
     );
   }
 
-  // ── Section title ──────────────────────────────────────────────────────────
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
@@ -298,7 +307,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Picks horizontal row ───────────────────────────────────────────────────
   Widget _buildPicksRow() {
     return SizedBox(
       height: 136,
@@ -317,7 +325,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.expand,
                 children: [
                   Image.asset(pick.imageUrl, fit: BoxFit.cover),
-                  // gradient overlay
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
@@ -328,7 +335,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  // label
                   Positioned(
                     bottom: 8,
                     left: 0,
@@ -352,7 +358,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Trending list ──────────────────────────────────────────────────────────
   Widget _buildTrendingList() {
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
@@ -366,7 +371,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Bottom nav bar ─────────────────────────────────────────────────────────
   Widget _buildNavBar() {
     return Container(
       height: 64,
@@ -401,7 +405,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ── Trending card widget ──────────────────────────────────────────────────────
 class _TrendingCard extends StatelessWidget {
   final _TrendingPlace place;
 
@@ -414,7 +417,6 @@ class _TrendingCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // image
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Image.asset(
@@ -425,7 +427,6 @@ class _TrendingCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        // name + rating row
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -455,7 +456,6 @@ class _TrendingCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 4),
-        // status + distance
         Row(
           children: [
             Text(
@@ -485,7 +485,6 @@ class _TrendingCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 4),
-        // price
         Text(
           place.price,
           style: GoogleFonts.poppins(
@@ -499,7 +498,6 @@ class _TrendingCard extends StatelessWidget {
   }
 }
 
-// ── Nav item widget ───────────────────────────────────────────────────────────
 class _NavItem extends StatelessWidget {
   final IconData icon;
   final String label;
