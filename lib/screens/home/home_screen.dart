@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../search_screen.dart';
 
 // ── Trending place model ──────────────────────────────────────────────────────
 class _TrendingPlace {
@@ -36,7 +37,7 @@ const _trendingPlaces = [
     distance: '12 Km away',
     price: 'From ₹3,406.52',
     rating: '4.5 (22,798)',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/6f7d23bd-56b5-440c-a429-87cbf7f47413',
+    imageUrl: 'assets/home/t1.png',
   ),
   _TrendingPlace(
     name: 'Jodd Fairs Night Market',
@@ -44,7 +45,7 @@ const _trendingPlaces = [
     distance: '15 Km away',
     price: 'From ₹300',
     rating: '4.3 (13,478)',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/88189e15-35c3-44ae-8462-839ecfdae949',
+    imageUrl: 'assets/home/t2.png',
   ),
   _TrendingPlace(
     name: 'Benjakitti Forest Park',
@@ -52,7 +53,7 @@ const _trendingPlaces = [
     distance: '8 Km away',
     price: 'From ₹4,598',
     rating: '4.6 (9,062)',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/3206d1a3-cced-4a0d-a400-037c822dc338',
+    imageUrl: 'assets/home/t3.png',
   ),
   _TrendingPlace(
     name: 'Bangkok Art & Culture Centre',
@@ -60,7 +61,7 @@ const _trendingPlaces = [
     distance: '18 Km away',
     price: 'From ₹2,902',
     rating: '4.5 (19,062)',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/e2f615ac-a526-4c20-b4b7-64707580eaf0',
+    imageUrl: 'assets/home/t4.png'
   ),
 ];
 
@@ -138,7 +139,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     _buildHeader(),
                     const SizedBox(height: 20),
-                    _buildSearchBar(),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SearchScreen()),
+                      ),
+                      child: _buildSearchBar(),
+                    ),
                     const SizedBox(height: 16),
                     _buildFilterChips(),
                     const SizedBox(height: 24),
@@ -198,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
 
   // ── Search bar ─────────────────────────────────────────────────────────────
   Widget _buildSearchBar() {
@@ -361,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ── Bottom nav bar ─────────────────────────────────────────────────────────
   Widget _buildNavBar() {
     return Container(
-      height: 59,
+      height: 64,
       decoration: BoxDecoration(
         color: _primary,
         borderRadius: BorderRadius.circular(12),
@@ -409,7 +417,7 @@ class _TrendingCard extends StatelessWidget {
         // image
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.network(
+          child: Image.asset(
             place.imageUrl,
             height: 131,
             width: double.infinity,
