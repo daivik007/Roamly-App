@@ -15,20 +15,20 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
 
   final List<Map<String, String>> _modes = [
     {
-      'label': 'WALK',
-      'image': 'https://www.figma.com/api/mcp/asset/3d25a0b3-a6ac-4635-97b3-09af01c019a2',
+      'label': 'Walk',
+      'image': 'assets/onb2/walk.jpg',
     },
     {
-      'label': 'NEARBY',
-      'image': 'https://www.figma.com/api/mcp/asset/e700a60e-8414-45d6-94e9-302976c9416e',
+      'label': 'Nearby',
+      'image': 'assets/onb2/nearby.jpg',
     },
     {
-      'label': 'DRIVE',
-      'image': 'https://www.figma.com/api/mcp/asset/c4e504da-dca7-495a-bdad-e286558dc709',
+      'label': 'Drive',
+      'image': 'assets/onb2/drive.jpg',
     },
     {
-      'label': 'TRAIN',
-      'image': 'https://www.figma.com/api/mcp/asset/c5b122e4-65ef-431a-8320-451e560a918d',
+      'label': 'Train',
+      'image': 'assets/onb2/train.jpg',
     },
   ];
 
@@ -137,7 +137,7 @@ class _TravelTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(imageUrl, fit: BoxFit.cover),
+            Image.asset(imageUrl, fit: BoxFit.cover),
 
             Container(
               color: isSelected

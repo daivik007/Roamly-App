@@ -15,28 +15,28 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
 
   final List<Map<String, String>> _categories = [
     {
-      'label': 'CAFE',
-      'image': 'https://www.figma.com/api/mcp/asset/b2264041-8f3d-44fc-9f6d-e00ef0bf7ad9',
+      'label': 'Cafe',
+      'image': 'assets/onb1/cafe.png',
     },
     {
-      'label': 'OUTDOOR',
-      'image': 'https://www.figma.com/api/mcp/asset/62fcc623-c3c6-41cf-96bd-6a05bc2c6ad0',
+      'label': 'Outdoor',
+      'image': 'assets/onb1/outdoor.jpg',
     },
     {
-      'label': 'CLUB',
-      'image': 'https://www.figma.com/api/mcp/asset/72b57b03-5c08-4528-b023-95fd92906467',
+      'label': 'Club',
+      'image': 'assets/onb1/club.jpg',
     },
     {
-      'label': 'MUSEUM',
-      'image': 'https://www.figma.com/api/mcp/asset/53d756c7-b3e4-4bb8-bb58-1a8302829a6d',
+      'label': 'Museum',
+      'image': 'assets/onb1/museum.jpg',
     },
     {
-      'label': 'MARKETS',
-      'image': 'https://www.figma.com/api/mcp/asset/81a555ae-260c-4cfb-933b-e77b5727a60d',
+      'label': 'Markets',
+      'image': 'assets/onb1/markets.jpg',
     },
     {
-      'label': 'CULTURE',
-      'image': 'https://www.figma.com/api/mcp/asset/c07159dc-5a28-4cb6-95c9-0c4f4c70784c',
+      'label': 'Culture',
+      'image': 'assets/onb1/culture.jpg',
     },
   ];
 
@@ -170,7 +170,7 @@ class _CategoryTile extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Background image
-            Image.network(
+            Image.asset(
               imageUrl,
               fit: BoxFit.cover,
             ),

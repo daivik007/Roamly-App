@@ -71,6 +71,8 @@ flutter:
   assets:
   - assets/icons/Google.svg
   - assets/illus/girl_run.svg
+  - assets/onb1/
+  - assets/onb2/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
