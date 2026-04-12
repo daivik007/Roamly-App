@@ -182,19 +182,33 @@ class _CategoryTile extends StatelessWidget {
                   : Colors.black.withOpacity(0.5),
             ),
 
-            // Selected teal border
+            // Teal overlay animation
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              color: isSelected ? const Color(0xFF9CF1EC).withOpacity(0.35) : Colors.transparent,
+            ),
+
             if (isSelected)
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: const Color(0xFF9CF1EC),
-                    width: 3,
-                  ),
-                ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: const Color(0xFF9CF1EC),
+                  width: 3
+                )
+              )
+            ),
+
+              // Checkmark icon
+              if (isSelected)
+              const Center(
+                child: Icon(Icons.check,
+                color: Colors.black,
+                size: 45)
               ),
 
             // Label
+            if (!isSelected)
             Center(
               child: Text(
                 label,

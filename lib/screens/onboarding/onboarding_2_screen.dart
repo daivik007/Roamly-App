@@ -145,6 +145,11 @@ class _TravelTile extends StatelessWidget {
                   : Colors.black.withOpacity(0.5),
             ),
 
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              color: isSelected ? const Color(0xFF9CF1EC).withOpacity(0.35) : Colors.transparent,
+            ),
+
             if (isSelected)
               Container(
                 decoration: BoxDecoration(
@@ -156,6 +161,15 @@ class _TravelTile extends StatelessWidget {
                 ),
               ),
 
+              if (isSelected)
+              const Center(
+                child: Icon(Icons.check,
+                color: Colors.black,
+                size: 45)
+              ),
+
+
+            if (!isSelected)
             Center(
               child: Text(
                 label,
