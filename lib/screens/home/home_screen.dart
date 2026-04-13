@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../search_screen.dart';
+import '../saved_screen.dart';
+import '../profile_screen.dart';
 
 // ── Trending place model ──────────────────────────────────────────────────────
 class _TrendingPlace {
@@ -66,30 +68,12 @@ const _trendingPlaces = [
 ];
 
 const _picks = [
-  _Pick(
-    name: 'Assumption\nCathedral',
-    imageUrl: 'assets/home/1.png',
-  ),
-  _Pick(
-    name: 'Wat Arun',
-    imageUrl: 'assets/home/2.png',
-  ),
-  _Pick(
-    name: 'ICONSIAM',
-    imageUrl: 'assets/home/3.png',
-  ),
-  _Pick(
-    name: 'The Grand\nPalace',
-    imageUrl: 'assets/home/4.png',
-  ),
-  _Pick(
-    name: 'Lumphini\nPark',
-    imageUrl: 'assets/home/5.png',
-  ),
-  _Pick(
-    name: 'Erawan Shrine',
-    imageUrl: 'assets/home/6.png',
-  ),
+  _Pick(name: 'Assumption\nCathedral', imageUrl: 'assets/home/1.png'),
+  _Pick(name: 'Wat Arun', imageUrl: 'assets/home/2.png'),
+  _Pick(name: 'ICONSIAM', imageUrl: 'assets/home/3.png'),
+  _Pick(name: 'The Grand\nPalace', imageUrl: 'assets/home/4.png'),
+  _Pick(name: 'Lumphini\nPark', imageUrl: 'assets/home/5.png'),
+  _Pick(name: 'Erawan Shrine', imageUrl: 'assets/home/6.png'),
 ];
 
 const _filterChips = [
@@ -125,6 +109,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_navIndex == 1) {
+      return const SavedScreen();
+    }
+
+    if (_navIndex == 2) {
+      return const ProfileScreen();
+    }
+
     return Scaffold(
       backgroundColor: _bg,
       body: SafeArea(
@@ -160,12 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 8,
-              child: _buildNavBar(),
-            ),
+            Positioned(left: 16, right: 16, bottom: 8, child: _buildNavBar()),
           ],
         ),
       ),
@@ -263,7 +250,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? const Color(0xFF9CF1EC).withOpacity(0.35)
@@ -446,10 +436,7 @@ class _TrendingCard extends StatelessWidget {
                 const SizedBox(width: 3),
                 Text(
                   place.rating,
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    color: Colors.white,
-                  ),
+                  style: GoogleFonts.inter(fontSize: 11, color: Colors.white),
                 ),
               ],
             ),
@@ -462,7 +449,9 @@ class _TrendingCard extends StatelessWidget {
               place.status,
               style: GoogleFonts.poppins(
                 fontSize: 12,
-                color: isOpen ? const Color(0xFF9CF1EC) : const Color(0xFFFF6B6B),
+                color: isOpen
+                    ? const Color(0xFF9CF1EC)
+                    : const Color(0xFFFF6B6B),
               ),
             ),
             const SizedBox(width: 8),
@@ -477,10 +466,7 @@ class _TrendingCard extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               place.distance,
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                color: Colors.white,
-              ),
+              style: GoogleFonts.poppins(fontSize: 12, color: Colors.white),
             ),
           ],
         ),
@@ -533,10 +519,7 @@ class _NavItem extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 label,
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  color: Colors.white,
-                ),
+                style: GoogleFonts.inter(fontSize: 11, color: Colors.white),
               ),
             ],
           ],
@@ -545,3 +528,7 @@ class _NavItem extends StatelessWidget {
     );
   }
 }
+
+// TODO: Connect home screen to saved screen
+// TODO: Show "Saved" only on click to heart
+// TODO: Fix the same for profile screen
