@@ -14,8 +14,6 @@ Roamly is a Flutter-based local exploration app that helps users discover nearby
 ## Tech Stack
 - Flutter
 - Dart
-- Google Maps API (planned)
-- Firebase (planned)
 
 ## Installation
 
